@@ -4,8 +4,7 @@ This project implements a simple fully connected feedforward neural network from
 Currently trained and evaluated on a binary classification dataset from Kaggle (Breast-cancer). It's been one-hot encoded. 
 
 Future plans:
-c++ version
-build a web application that showcases how neural networks works, important factors such as feedforwards, backpropagate etc..(in progress)
+c++ version & build a web application that showcases how neural networks works, important factors such as feedforwards, backpropagate etc..(in progress)
 
 
 #Quick Demo
