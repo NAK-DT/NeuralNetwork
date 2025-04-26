@@ -8,11 +8,11 @@ class NeuralNetwork:
         self.biases = []
         self.learning_rate = None
 
-        # Initialize weights and biases
+        #weights and biases initialization
         for i in range(len(layers) - 1):
             in_size = layers[i]
             out_size = layers[i + 1]
-            limit = np.sqrt(6 / (in_size + out_size))  # Xavier initialization
+            limit = np.sqrt(6 / (in_size + out_size))
             w = np.random.uniform(-limit, limit, (out_size, in_size))
             b = np.zeros(out_size)
             self.weights.append(w)
@@ -74,19 +74,19 @@ class NeuralNetwork:
     def backpropagate(self, X, y, activations, zs, loss_function='cross_entropy_loss'):
         delta = self._cross_entropy_derivative(y, activations[-1])
 
-        nabla_w = [np.zeros_like(w) for w in self.weights]
-        nabla_b = [np.zeros_like(b) for b in self.biases]
+        nablaw = [np.zeros_like(w) for w in self.weights]
+        nablab = [np.zeros_like(b) for b in self.biases]
 
         for l in reversed(range(len(self.weights))):
-            nabla_w[l] = delta.T @ activations[l]
-            nabla_b[l] = np.sum(delta, axis=0)
+            nablaw[l] = delta.T @ activations[l]
+            nablab[l] = np.sum(delta, axis=0)
 
             if l != 0:
                 delta = (delta @ self.weights[l]) * self._activation_derivative(zs[l-1], self.activations[l-1])
 
-        return nabla_w, nabla_b
+        return nablaw, nablab
 
-    def update_weights(self, nabla_w, nabla_b, batch_size):
+    def updateWeights(self, nabla_w, nabla_b, batch_size):
         for i in range(len(self.weights)):
             self.weights[i] -= self.learning_rate * nabla_w[i] / batch_size
             self.biases[i] -= self.learning_rate * nabla_b[i] / batch_size
@@ -107,7 +107,7 @@ class NeuralNetwork:
 
                 activations, zs = self.feedforward(batch_X)
                 nabla_w, nabla_b = self.backpropagate(batch_X, batch_y, activations, zs)
-                self.update_weights(nabla_w, nabla_b, batch_X.shape[0])
+                self.updateWeights(nabla_w, nabla_b, batch_X.shape[0])
 
             if verbose and epoch % 5 == 0:
                 preds, _ = self.feedforward(X_train)
