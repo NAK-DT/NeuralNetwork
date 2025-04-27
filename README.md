@@ -1,6 +1,6 @@
 ﻿# Neural Network from Scratch
 
-This project implements a simple fully connected feedforward neural network from scratch using only NumPy using no ML libraries such as TensorFlow, PyTorch. 
+This project implements a simple fully connected feedforward neural network from scratch using no ML libraries such as TensorFlow, PyTorch. 
 Currently trained and evaluated on a binary classification dataset from Kaggle (Breast-cancer). It's been one-hot encoded. 
 
 Future plans:
